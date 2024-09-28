@@ -1,0 +1,163 @@
+/* Main grid container styling */
+.grid-flex {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* Individual coin card styling */
+.grid-container {
+  background-color: var(--darkgrey); /* White background */
+  border-radius: 1rem; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Added transform transition */
+  width: 300px; /* Adjusted width */
+  height: 300px; /* Fixed height for cards */
+}
+
+.grid-container:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+  transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+/* Flex container for the image and text */
+.info-flex {
+  display: flex;
+  align-items: center; /* Center image and text vertically */
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Coin image styling */
+.coin-image {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%; /* Circular image */
+  object-fit: cover; /* Keep aspect ratio of the image */
+  border: 2px solid #e0e0e0; /* Light border */
+}
+
+/* Symbol and name container */
+.name-col {
+  display: flex;
+  flex-direction: column; /* Stack the text vertically */
+}
+
+/* Coin symbol styling */
+.coin-symbol {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white); /* Dark color for symbol */
+  margin: 0;
+}
+
+/* Coin name styling */
+.coin-name {
+  font-size: 0.85rem;
+  color: #777; /* Subtle grey for the name */
+  margin: 0;
+}
+
+/* Flexbox container for price change chip and icon */
+.chip-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+/* Price change chip styling */
+.price-chip {
+  border: 2px solid #4caf50;
+  border-radius: 2rem;
+  padding: 0.25rem 1rem;
+  font-weight: 600;
+  color: #4caf50;
+}
+
+.price-chip.red {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+/* Arrow icon next to percentage */
+.chip-icon {
+  border: 2px solid #4caf50;
+  padding: 0.2rem;
+  border-radius: 50%;
+  color: #4caf50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.chip-icon.red {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+/* Price styling */
+.current-price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #4caf50; /* Dark color for price */
+  margin-top: 1rem;
+}
+
+.current-price.red {
+  color: #f44336;
+}
+/* Coin stats (Total Volume and Market Cap) */
+.coin-stats {
+  font-size: 0.85rem;
+  color: #888; /* Subtle grey for stats */
+  margin-top: 0.5rem;
+}
+
+/* Individual stat item styling */
+.stat-item {
+  display: flex;
+  justify-content: space-between; /* Align text and value with space between */
+  margin-top: 0.25rem; /* Add some spacing between items */
+}
+
+/* Stat label styling */
+.stat-item span {
+  display: inline-block;
+}
+
+/* Stat value with spacing */
+.stat-value {
+  margin-left: 0.5rem; /* Adjust the margin to create spacing between label and value */
+  font-weight: 600; /* Optional: make the value stand out */
+  color: var(--white); /* Optional: adjust color if needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .grid-flex {
+    grid-template-columns: repeat(3, 1fr); /* Adjust to 3 items per row on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-flex {
+    grid-template-columns: repeat(2, 1fr); /* Adjust to 2 items per row on smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-flex {
+    grid-template-columns: repeat(1, 1fr); /* Adjust to 1 item per row on small screens */
+  }
+
+  .grid-container {
+    width: 100%; /* Make cards full-width on small screens */
+  }
+}
