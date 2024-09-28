@@ -1,5 +1,3 @@
-Here's an updated **README.md** that includes the new file structure you provided:
-
 ---
 
 # CryptoTracker
@@ -273,5 +271,3 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
-
-Feel free to modify this template further according to your specific requirements and project nuances!
