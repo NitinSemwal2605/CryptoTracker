@@ -1,6 +1,4 @@
-Here's an in-depth **README.md** file for your cryptocurrency tracker project with watchlist functionality:
 
----
 
 # CryptoTracker
 
