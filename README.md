@@ -1,5 +1,3 @@
-
-
 # CryptoTracker
 
 CryptoTracker is a cryptocurrency tracking application that fetches live data from the [CoinGecko API](https://www.coingecko.com/en/api) and displays key information such as the coin’s price, volume, and market cap. Users can add coins to a personalized **watchlist**, which is stored in the browser’s `localStorage`. The watchlist feature allows users to toggle their favorite coins and keeps them saved until manually removed.
@@ -48,18 +46,86 @@ CryptoTracker is a cryptocurrency tracking application that fetches live data fr
 
 ```bash
 ├── src
-│   ├── components
-│   │   ├── Grid.js          # Displays individual coin information
-│   │   ├── List.js          # Displays the full list of coins
-│   ├── pages
-│   │   ├── WatchlistPage.js # Displays the user's watchlist
-│   ├── App.js               # Main entry point for routing
-│   ├── index.js             # React DOM render entry point
-│   ├── styles.css           # Custom CSS styling
-├── public
-│   ├── index.html
-├── package.json             # Dependencies and scripts
-└── README.md                # Project documentation
+├── assets/
+│   ├── components/
+│   │   ├── About/
+│   │   │   └── index.jsx
+│   │   ├── Banner/
+│   │   │   └── index.jsx
+│   │   ├── Coin/
+│   │   │   ├── CoinInfo/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   ├── LineChart/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   ├── SelectDays/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   └── PriceType/
+│   │   │       ├── index.jsx
+│   │   │       └── styles.css
+│   │   ├── Common/
+│   │   │   ├── Button/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   ├── Footer/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   ├── Header/
+│   │   │   │   ├── drawer.js
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   ├── Loader/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   ├── Search/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   ├── Tabs/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   └── Pagination/
+│   │   │       ├── index.jsx
+│   │   │       └── styles.css
+│   │   ├── Dashboard/
+│   │   │   ├── Grid/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   ├── List/
+│   │   │   │   ├── index.jsx
+│   │   │   │   └── styles.css
+│   │   │   └── Testimonials/
+│   │   │       └── index.jsx
+│   │   └── Watchlist/
+│   │       └── index.jsx
+│   └── styles.css
+│
+├── functions/
+│   ├── coinObject.js
+│   ├── getCoinData.js
+│   └── getCoinPrices.js
+│
+├── pages/
+│   ├── AuthContext.js
+│   ├── Coin.js
+│   ├── ComparePage.js
+│   ├── DashboardPage.js
+│   ├── LoginPage.js
+│   ├── SignupPage.js
+│   └── WatchlistPage.js
+│
+├── App.css
+├── App.js
+├── index.css
+├── index.js
+├── .gitignore
+├── database.rules.json
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── README.md
+└── tailwind.config.js
 ```
 
 ---
@@ -157,82 +223,48 @@ const fetchCoinsData = async () => {
     console.error("Error fetching coins", error);
   }
 };
+
+
 ```
-
-### API Reference
-
-- **Base URL**: `https://api.coingecko.com/api/v3/`
-- **Endpoints Used**:
-  - `/coins/markets` for fetching market data for a list of coins.
 
 ---
 
 ## Watchlist Functionality
 
-### Adding a Coin to Watchlist
+- The watchlist is maintained using the browser’s `localStorage`.
+- Upon adding or removing a coin, a toast notification appears to inform the user of the action.
 
-The watchlist functionality is implemented using `localStorage`. When a user clicks the star icon, the `coin.id` is saved to a `Set` in `localStorage`. The coin remains on the watchlist until manually removed.
-
-### LocalStorage Integration
+### Example Code Snippet
 
 ```js
-const [watchlist, setWatchlist] = useState(new Set());
-
-useEffect(() => {
-  const savedWatchlist = localStorage.getItem('watchlist');
-  if (savedWatchlist) {
-    setWatchlist(new Set(JSON.parse(savedWatchlist)));
-  }
-}, []);
-
-useEffect(() => {
-  localStorage.setItem('watchlist', JSON.stringify([...watchlist]));
-}, [watchlist]);
+const handleWatchlistToggle = (coin) => {
+  // Logic to add/remove from watchlist
+  toast.success(`${coin.name} added to watchlist!`);
+};
 ```
 
 ---
 
 ## Toast Notifications
 
-To enhance the user experience, **react-toastify** is used for toast notifications when adding/removing coins from the watchlist.
+**Toastify** is used to provide user feedback when coins are added or removed from the watchlist.
 
-### Toast Example
+### Example Notification
 
 ```js
-toast.success('Added to watchlist');
-toast.info('Removed from watchlist');
-```
-
-### Toast Configuration
-
-```jsx
-<ToastContainer
-  position="bottom-right"
-  autoClose={3000}
-  hideProgressBar={false}
-  closeOnClick
-  pauseOnHover
-/>
+toast.success("Coin added to watchlist!");
 ```
 
 ---
 
 ## Contributing
 
-Contributions are welcome! If you have suggestions or find bugs, feel free to create a pull request or open an issue.
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/my-feature`.
-3. Make your changes and commit: `git commit -m 'Add new feature'`.
-4. Push to the branch: `git push origin feature/my-feature`.
-5. Open a pull request on GitHub.
+Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
-
-**Happy Coding! 🚀**
